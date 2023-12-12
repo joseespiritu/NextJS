@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const pokeApi = axios.create({
-    baseURL: 'https://pokeapi.co/api/v2'
+    baseURL: process.env.NEXT_PUBLIC_POKEMON_BASE_URL
 });
 
 export default pokeApi;
