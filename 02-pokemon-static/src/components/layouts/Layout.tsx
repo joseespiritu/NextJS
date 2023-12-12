@@ -21,6 +21,12 @@ export const Layout: React.FC<Props> = ({ children, title = 'PokemónApp' }) => 
                 <meta property="og:title" content={`Información sobre ${title}`} />
                 <meta property="og:description" content={`Esta es la página sobre ${ title }`} />
                 <meta property="og:image" content={`${origin}/img/banner.png`} />
+
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:site" content="@digitalocean" />
+                <meta name="twitter:title" content={`Información sobre ${title}`}  />
+                <meta name="twitter:description" content={`Esta es la página sobre ${ title }`}/>
+                <meta name="twitter:image" content={`${origin}/img/banner.png`} />
             </Head>
 
             <Navbar />
