@@ -1,25 +1,25 @@
 'use client';
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 import { IoTrashOutline } from "react-icons/io5";
 import { addTodo, deleteCompleted } from "../actions/todo-actions";
 
-// import * as todosApi from '@/todos/helpers/todos';
+import * as todosApi from '@/todos/helpers/todos';
 
 export const NewTodo = () => {
 
-    // const router = useRouter();
+    const router = useRouter();
     const [description, setDescription] = useState('');
 
     const onSubmit = async (e: FormEvent) => {
         e.preventDefault();
         if(description.trim().length === 0) return;
         
-        // const createdTodo = await todosApi.createTodo(description);
-        const createdTodo = await addTodo(description);
+        // const createdTodo = await addTodo(description);
+        const createdTodo = await todosApi.createTodo(description);
         setDescription('');
-        // router.refresh();
+        router.refresh();
         return createdTodo;
     };
 
