@@ -1,6 +1,8 @@
 export * from "./products/product-grid/ProductGridItem";
 export * from "./products/product-grid/ProductGrid";
 
+export * from "./provider/Provider";
+
 export * from "./ui/pagination/Pagination";
 
 export * from "./ui/footer/Footer";
