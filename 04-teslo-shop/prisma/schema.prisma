@@ -111,14 +111,14 @@ model UserAddress {
   userId String @unique
 }
 
-// Orden de compras
+// Order de compras
 model Order {
   id           String    @id @default(uuid())
   subTotal     Float
   tax          Float
   total        Float
   itemsInOrder Int
-  isPaid       Boolean
+  isPaid       Boolean   @default(false)
   paidAt       DateTime?
 
   createdAt DateTime @default(now())
@@ -160,6 +160,6 @@ model OrderAddress {
   country   Country @relation(fields: [countryId], references: [id])
   countryId String
 
-  order   Order  @relation(fields: [orderId], references: [id])
+  Order   Order  @relation(fields: [orderId], references: [id])
   orderId String @unique
 }

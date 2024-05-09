@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-
 interface State {
     address: {
         firstName: string;
@@ -9,34 +8,35 @@ interface State {
         address: string;
         address2?: string;
         postalCode: string;
-        country: string;
         city: string;
+        country: string;
         phone: string;
-    }
+    };
 
     // Methods
-    setAddress: (address: State['address']) => void;
+    setAddress: (address: State["address"]) => void;
 }
 
 export const useAddressStore = create<State>()(
     persist(
         (set, get) => ({
             address: {
-                firstName: '',
-                lastName: '',
-                address: '',
-                address2: '',
-                postalCode: '',
-                country: '',
-                city: '',
-                phone: '',
+                firstName: "",
+                lastName: "",
+                address: "",
+                address2: "",
+                postalCode: "",
+                city: "",
+                country: "",
+                phone: "",
             },
+
             setAddress: (address) => {
                 set({ address });
-            }
+            },
         }),
         {
-            name: 'address-storage'
+            name: "address-storage",
         }
     )
 );
