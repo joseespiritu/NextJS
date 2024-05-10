@@ -7,14 +7,19 @@
 4. Levantar la base de datos ```docker compose up -d```
 5. Correr las migraciones de Prisma ```npx prisma migrate dev```
 6. Ejecutar seed ```npm run seed```
-7. Limpiar el local storage del navegador web
-8. Correr el proyecto ```npm run dev```
+7. Correr el proyecto ```npm run dev```
+8. Limpiar el local storage del navegador web
 
 ## Correr en prod
 
 
 ### Notas
-Dependencias para tailwind -> Condicionales en Tailwind para NextJS
+* Dependencias para tailwind -> Condicionales en Tailwind para NextJS
 ```
 npm install clsx
+```
+* React Paypal
+```
+https://www.npmjs.com/package/@paypal/react-paypal-js
+npm i @paypal/react-paypal-js
 ```

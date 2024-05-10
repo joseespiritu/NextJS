@@ -1,7 +1,11 @@
 export * from "./products/product-grid/ProductGridItem";
 export * from "./products/product-grid/ProductGrid";
 
-export * from "./provider/Provider";
+export * from "./orders/OrderStatus";
+
+export * from "./providers/Providers";
+
+export * from "./paypal/PaypalButton";
 
 export * from "./ui/pagination/Pagination";
 
