@@ -1,14 +1,14 @@
 "use client";
 
-import { createUpdateProduct } from "@/actions";
-import { Category, Product, ProductImage } from "@/interfaces";
-import clsx from "clsx";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { createUpdateProduct, deleteProductImage } from "@/actions";
+import { ProductImage } from "@/components";
+import { Category, Product, ProductImage as ProductWithImage } from "@/interfaces";
+import clsx from "clsx";
 
 interface Props {
-    product: Partial<Product> & { ProductImage?: ProductImage[] };
+    product: Partial<Product> & { ProductImage?: ProductWithImage[] };
     categories: Category[];
 }
 
@@ -24,8 +24,7 @@ interface FormInputs {
     tags: string;
     gender: 'men' | 'women' | 'kid' | 'unisex';
     categoryId: string;
-
-    // TODO: Images
+    images?: FileList;
 }
 
 export const ProductForm = ({ product, categories }: Props) => {
@@ -44,8 +43,7 @@ export const ProductForm = ({ product, categories }: Props) => {
             ...product,
             tags: product.tags?.join(', '),
             sizes: product.sizes ?? [],
-
-            // TODO: Images
+            images: undefined
         }
     });
 
@@ -63,7 +61,7 @@ export const ProductForm = ({ product, categories }: Props) => {
 
         const formData = new FormData();
 
-        const { ...productToSave } = data;
+        const { images, ...productToSave } = data;
 
         if ( product.id ) {
             formData.append('id', product.id ?? '');
@@ -77,6 +75,12 @@ export const ProductForm = ({ product, categories }: Props) => {
         formData.append('tags', productToSave.tags);
         formData.append('categoryId', productToSave.categoryId);
         formData.append('gender', productToSave.gender);
+
+        if ( images ) {
+            for (let i = 0; i < images.length; i++) {
+                formData.append('images', images[i]);
+            }
+        }
 
         const { ok, product: updatedProduct } = await createUpdateProduct(formData);
 
@@ -193,9 +197,10 @@ export const ProductForm = ({ product, categories }: Props) => {
                         <span>Fotos</span>
                         <input
                             type="file"
+                            { ...register('images') }
                             multiple
                             className="p-2 border rounded-md bg-gray-200"
-                            accept="image/png, image/jpeg"
+                            accept="image/png, image/jpeg, image/avif"
                         />
 
                     </div>
@@ -204,16 +209,16 @@ export const ProductForm = ({ product, categories }: Props) => {
                         {
                             product.ProductImage?.map(image => (
                                 <div key={image.id}>
-                                    <Image
+                                    <ProductImage
                                         alt={product.title ?? ''}
-                                        src={`/products/${image.url}`}
+                                        src={image.url}
                                         width={300}
                                         height={300}
                                         className="rounded shadow-md rounded-t"
                                     />
                                     <button
                                         type="button"
-                                        onClick={() => console.log(image.id, image.url)}
+                                        onClick={() => deleteProductImage(image.id, image.url)}
                                         className="btn-danger rounded-b-xl w-full"
                                     >
                                         Eliminar
