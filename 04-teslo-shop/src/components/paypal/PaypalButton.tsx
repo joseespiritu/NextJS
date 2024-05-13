@@ -24,7 +24,7 @@ export const PaypalButton = ({ orderId, amount }: Props) => {
         )
     }
 
-    const createOrder = async(data: CreateOrderData, actions: CreateOrderActions): Promise<string> => {
+    const createOrder = async(data: CreateOrderData, actions: any): Promise<string> => {
 
         const transactionId = await actions.order.create({
             purchase_units: [
